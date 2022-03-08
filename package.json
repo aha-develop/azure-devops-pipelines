@@ -1,0 +1,43 @@
+{
+  "name": "aha-develop.azure-pipelines",
+  "description": "Azure Pipelines Integration",
+  "version": "0.0.0",
+  "author": "Aha! (support@aha.io)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aha-develop/azure-devops-pipelines"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@aha-app/aha-develop-react": "^1.0.6",
+    "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.13",
+    "prettier": "^2.5.1"
+  },
+  "ahaExtension": {
+    "contributes": {
+      "views": {
+        "azurePipelinesAttribute": {
+          "title": "Azure Pipelines",
+          "entryPoint": "src/views/azurePipelines.tsx",
+          "host": "attribute",
+          "recordTypes": [
+            "Feature",
+            "Requirement",
+            "Epic"
+          ]
+        }
+      },
+      "endpoints": {
+        "azurePipelinesHook": {
+          "title": "Hook from Azure Pipelines",
+          "entryPoint": "src/endpoints/azurePipelines.ts",
+          "public": true
+        }
+      }
+    }
+  }
+}
