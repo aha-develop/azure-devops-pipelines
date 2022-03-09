@@ -57,7 +57,7 @@ const parsePayloadToPipeline = (payload: Webhook.Payload): IExtensionFieldPipeli
       pipeline = null;
       break;
     }
-    default: {
+    case '2.0-preview.2': {
       const { resource } = payload as Webhook.Payload<AzureDevops.PipelineBuildCompletedResourcesV2>;
       pipeline = {
         project: {
@@ -81,6 +81,10 @@ const parsePayloadToPipeline = (payload: Webhook.Payload): IExtensionFieldPipeli
           }
         }
       };
+      break;
+    }
+    default: {
+      pipeline = null;
       break;
     }
   }
