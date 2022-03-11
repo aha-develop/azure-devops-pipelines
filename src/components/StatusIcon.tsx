@@ -11,7 +11,8 @@ const DEFAULT_STYLE = {
   lineHeight: '14px',
   padding: '4px 8px',
   borderRadius: '4px',
-  verticalAlign: 'middle'
+  verticalAlign: 'middle',
+  textTransform: 'capitalize'
 };
 
 const StatusIcon = ({ status, style = {} }: StatusIconProps) => {

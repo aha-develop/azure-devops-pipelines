@@ -5,12 +5,17 @@
  * @returns
  */
 export const getRecord = async (searchStr: string): Promise<Aha.RecordUnion | null> => {
-  const reference = extractStrToReference(searchStr);
+  try {
+    const reference = extractStrToReference(searchStr);
 
-  if (!reference) {
+    if (!reference) {
+      return null;
+    }
+    return getRecordFromReference(reference);
+  } catch (error) {
+    console.log('Error in extractStrToReference => ', error);
     return null;
   }
-  return getRecordFromReference(reference);
 };
 
 /**

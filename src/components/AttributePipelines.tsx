@@ -18,7 +18,7 @@ const AttributePipelines = ({ pipelines = [], project }: AttributePipelinesProps
   const handleBranchClick = useCallback(
     (pipeline: IPipeline) => {
       window.open(
-        `${project.url}?version=GB${pipeline.branch?.replace('refs/heads/', '') ?? 'main'}]`,
+        `${project?.url}?version=GB${pipeline?.branch?.replace('refs/heads/', '') ?? 'main'}]`,
         '_blank',
         'noopener,noreferrer'
       );

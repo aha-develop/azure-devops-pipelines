@@ -19,7 +19,7 @@ const Attribute = ({ fields, record }: AttributeProps) => {
             return (
               <div key={index}>
                 <AttributeProject project={field.project} />
-                <AttributePipelines pipelines={Object.values(field?.pipelines ?? [])} />
+                <AttributePipelines pipelines={Object.values(field?.pipelines ?? [])} project={field.project} />
               </div>
             );
           })}

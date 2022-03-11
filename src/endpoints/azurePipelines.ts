@@ -54,6 +54,9 @@ const parsePayloadToPipeline = (payload: Webhook.Payload): IExtensionFieldPipeli
   let pipeline: IExtensionFieldPipeline;
   switch (payload.resourceVersion) {
     case '1.0': {
+      console.log(
+        "This extension requires that responses use resource version '2.0-preview.2'. Please update your service hook configuration in Azure DevOps."
+      );
       pipeline = null;
       break;
     }
