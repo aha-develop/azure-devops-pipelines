@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import ExternalLink from './ExternalLink';
 
 export type AttributeProjectProps = {
   project: IProject;
@@ -10,12 +11,12 @@ const AttributeProject = ({ project }: AttributeProjectProps) => {
   }
   return (
     <aha-flex>
-      <a href={project.url} target="_blank">
+      <ExternalLink href={project.url}>
         <span className="type-icon">
           <aha-icon icon="fa-solid fa-bookmark type-icon" />
           <span style={{ marginLeft: '5px', fontWeight: 'bold' }}>{project?.name}</span>
         </span>
-      </a>
+      </ExternalLink>
     </aha-flex>
   );
 };

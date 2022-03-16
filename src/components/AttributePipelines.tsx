@@ -1,5 +1,7 @@
 import React, { useMemo, useCallback } from 'react';
 import { calcTimeElapsed } from '@helpers/calcTimeElapsed';
+import { isValidExternalLink } from '@helpers/isValidExternalLink';
+
 import IconText from './IconText';
 import StatusIcon from './StatusIcon';
 import CardLabel from './CardLabel';
@@ -17,6 +19,9 @@ const AttributePipelines = ({ pipelines = [], project }: AttributePipelinesProps
 
   const handleBranchClick = useCallback(
     (pipeline: IPipeline) => {
+      if (!isValidExternalLink(project?.url)) {
+        return;
+      }
       window.open(
         `${project?.url}?version=GB${pipeline?.branch?.replace('refs/heads/', '') ?? 'main'}]`,
         '_blank',
