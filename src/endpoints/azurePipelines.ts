@@ -32,10 +32,17 @@ const handleBuildCompleted = async (payload: Webhook.Payload) => {
 
   const pipeline = Object.values(recordField?.pipelines ?? {})?.[0];
 
-  // Make sure the MR is linked to its record.
-  let record = await getRecord(pipeline?.branch?.replace('refs/heads/', ''));
-  if (!record) {
-    record = await getRecord(pipeline?.commitMsg);
+  // Make sure the PR is linked to its record.
+  const branch = pipeline?.branch || pipeline?.prBranch;
+  const commitMsg = pipeline?.commitMsg;
+
+  let record;
+  if (branch) {
+    record = await getRecord(branch.replace('refs/heads/', ''));
+  }
+
+  if (!record && commitMsg) {
+    record = await getRecord(commitMsg);
   }
 
   if (!record) {
@@ -70,6 +77,10 @@ const parsePayloadToPipeline = (payload: Webhook.Payload): IExtensionFieldPipeli
     }
     case '2.0-preview.2': {
       const { resource } = payload as Webhook.Payload<AzureDevops.PipelineBuildCompletedResourcesV2>;
+      let parameters;
+      if (typeof resource?.parameters === 'string') {
+        parameters = JSON.parse(resource.parameters);
+      }
       pipeline = {
         project: {
           id: resource?.repository?.id,
@@ -87,6 +98,7 @@ const parsePayloadToPipeline = (payload: Webhook.Payload): IExtensionFieldPipeli
             commitHash: resource?.triggerInfo?.['ci.sourceSha'],
             commitMsg: resource?.triggerInfo?.['ci.message'],
             branch: resource?.triggerInfo?.['ci.sourceBranch'],
+            prBranch: parameters?.['system.pullRequest.sourceBranch'],
             authorName: resource?.requestedFor?.displayName,
             authorURL: resource?.requestedFor?.imageUrl
           }
