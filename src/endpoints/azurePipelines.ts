@@ -51,8 +51,7 @@ const handleBuildCompleted = async (payload: Webhook.Payload) => {
 
   await savePipelineToRecord(record, recordField);
 
-  const build : AzureDevops.PipelineBuildCompletedResourcesV2 = payload.resource
-  if (build.status === "succeeded") {
+  if (pipeline.buildStatus === 'succeeded') {
     await aha.triggerAutomationOn(record, `${IDENTIFIER}.buildPassed`, true);
   } else {
     await aha.triggerAutomationOn(record, `${IDENTIFIER}.buildFailed`, true);
