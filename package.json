@@ -1,6 +1,6 @@
 {
   "name": "aha-develop.azure-pipelines",
-  "description": "Azure Pipelines Integration",
+  "description": "Azure Pipelines",
   "version": "1.0.0",
   "author": "Aha! (support@aha.io)",
   "repository": {
@@ -36,6 +36,14 @@
           "title": "Hook from Azure Pipelines",
           "entryPoint": "src/endpoints/azurePipelines.ts",
           "public": true
+        }
+      },
+      "automationTriggers": {
+        "buildPassed": {
+          "title": "Build passed"
+        },
+        "buildFailed": {
+          "title": "Build failed"
         }
       }
     }

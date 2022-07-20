@@ -1,3 +1,4 @@
+import { IDENTIFIER } from '@helpers/config';
 import { getRecord } from '@helpers/getRecord';
 import { savePipelineToRecord } from '@helpers/savePipelineToRecord';
 
@@ -42,6 +43,13 @@ const handleBuildCompleted = async (payload: Webhook.Payload) => {
   }
 
   await savePipelineToRecord(record, recordField);
+
+  const build : AzureDevops.PipelineBuildCompletedResourcesV2 = payload.resource
+  if (build.status === "succeeded") {
+    await aha.triggerAutomationOn(record, `${IDENTIFIER}.buildPassed`, true);
+  } else {
+    await aha.triggerAutomationOn(record, `${IDENTIFIER}.buildFailed`, true);
+  }
 };
 
 /**
