@@ -25,6 +25,7 @@ declare interface IPipeline {
   commitHash?: string;
   commitMsg?: string;
   branch?: string;
+  prBranch?: string;
   workflow?: string;
   authorName?: string;
   authorURL?: string;

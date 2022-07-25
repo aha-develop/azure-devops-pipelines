@@ -13,7 +13,7 @@ export const getRecord = async (searchStr: string): Promise<Aha.RecordUnion | nu
     }
     return getRecordFromReference(reference);
   } catch (error) {
-    console.log('Error in extractStrToReference => ', error);
+    console.log(`Error in extractStrToReference => ${error}`);
     return null;
   }
 };

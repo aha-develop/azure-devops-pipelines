@@ -123,5 +123,6 @@ declare namespace AzureDevops {
       name?: string;
       url?: string;
     };
+    parameters?: string;
   }
 }
